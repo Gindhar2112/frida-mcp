@@ -1,0 +1,24 @@
+[project]
+name = "frida-agent-mcp"
+version = "0.1.0"
+description = "Frida MCP Server - AI-driven dynamic analysis tool"
+requires-python = ">=3.10"
+dependencies = [
+    "frida",
+    "frida-tools",
+    "mcp",
+]
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+frida-mcp = "frida_mcp.server:main"
+frida-mcp-setup = "frida_mcp.setup:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+frida_mcp = ["skills/*.md"]

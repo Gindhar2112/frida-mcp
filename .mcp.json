@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "frida-agent": {
+      "command": "frida-mcp"
+    },
+    "ida-pro-mcp": {
+      "command": "/opt/homebrew/opt/python@3.11/bin/python3.11",
+      "args": [
+        "/Volumes/Realtek/project/idapython/ida-pro-mcp/src/ida_pro_mcp/server.py"
+      ]
+    }
+  }
+}
